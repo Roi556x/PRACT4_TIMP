@@ -14,42 +14,42 @@ using namespace std;
 int main() {
     string mode, input_file_string, output_file_string, pass;
     cout << "Welcome! Enter working mode(encrypt or decrypt): ";
-    cin >> mode;
+    cin >> mode;//ввод мода:кодирования или раскодирования
     if (mode != "encrypt" && mode != "decrypt") {
-        cerr << "Invalid working mode" << endl;
+        cerr << "Invalid working mode" << endl;//исключение, когда мод неизвестен. cerr- стандартный поток ошибок
         return 1;
     }
     cout << "Enter password: ";
-    cin >> pass;
+    cin >> pass;//ввод пароля
     if(pass.size() < 8) {
         cerr << "Error! Too short password\n";
         return 1;
     }
     for(char c : pass){
         if(c < '!' or c > '~') {
-            cout << "Invalid symbol in password" << endl;
+            cout << "Invalid symbol in password" << endl;//был введён сторонний символ в пароль
             return 1;
         }
     }
     if (mode == "encrypt") {
-        cout << "Enter input file(or enter default): ";
+        cout << "Enter input file(or enter default): ";//файл из которого кодировать
         cin >> input_file_string;
         if(input_file_string == "default")
-            input_file_string = "/home/stud/test";
+            input_file_string = "/home/stud/test";//путь к "дефолтному" файлу
         ifstream input_check(input_file_string);
         if(input_check.is_open() == 0) {
-            cerr << "Invalid input file\n";
+            cerr << "Invalid input file\n";//неправильно введено имя файла или он не найден
             return 1;
         }
         input_check.close();
         
-        cout << "Enter output file(or enter default): ";
+        cout << "Enter output file(or enter default): "; //файл в который класть результат кодирования
         cin >> output_file_string;
         if(output_file_string == "default")
-            output_file_string = "/home/stud/encrypted_text_file";
+            output_file_string = "/home/stud/encrypted_text_file";//путь к "дефолтному" файлу
         ifstream output_check(output_file_string);
         if(output_check.is_open() == 0) {
-            cerr << "Invalid output file\n";
+            cerr << "Invalid output file\n";//неправильно введено имя файла или он не найден
             return 1;
         }
         output_check.close();
