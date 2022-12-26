@@ -1,5 +1,5 @@
 #include <cryptopp/cryptlib.h>
-#define CRYPTOPP_ENABLE_NAMESPACE_WEAK 1
+#define CRYPTOPP_ENABLE_NAMESPACE_WEAK 1//разрешение исп. WEAK
 #include <cryptopp/md5.h>
 #include <cryptopp/hex.h>
 #include <cryptopp/files.h>
@@ -10,10 +10,10 @@ using namespace std;
 int main() {
     string gsm, msg, result, result1;
     FileSource("/home/stud/test", true, new StringSink(msg));
-    msg.resize(msg.size() - 1);
+    msg.resize(msg.size() - 1);//уменьшение размера вектора
     cout << "Text from file: " << msg << endl;
-    HexEncoder encoder(new StringSink(result));
-    Weak::MD5 hash;
+    HexEncoder encoder(new StringSink(result)); //кодировщик в строку цифр
+    Weak::MD5 hash;// Создаем объект-"хэширователь" для MD5
     hash.Update((const byte*)&msg[0], msg.size());
     gsm.resize(hash.DigestSize());
     hash.Final((byte*)&gsm[0]);
